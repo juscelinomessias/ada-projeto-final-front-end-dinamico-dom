@@ -1,4 +1,7 @@
 
+
+
+
 const somar = () => {
     if(primeiroNumero === "0") {
       definirPrimeiroNumero(String(numeroAtual));
