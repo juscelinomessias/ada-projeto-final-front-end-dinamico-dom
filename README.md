@@ -34,7 +34,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="#">
         <img src="https://avatars.githubusercontent.com/u/139514670?v=4" width="100px;" alt="Foto do Juscelino Messias no Github"/><br>
         <sub>
-          <b>Juscelino Messias</b>
+          <b>Gabriel Funatsus</b>
         </sub>
       </a>
     </td>    
