@@ -30,6 +30,14 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
         </sub>
       </a>
     </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/139514670?v=4" width="100px;" alt="Foto do Juscelino Messias no Github"/><br>
+        <sub>
+          <b>Juscelino Messias</b>
+        </sub>
+      </a>
+    </td>    
   </tr>
 </table>
 
