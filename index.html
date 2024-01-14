@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora - DOM</title>
+
+    <link rel="stylesheet" href="./src/styles/reset.css">
+    <link rel="stylesheet" href="./src/styles/main.css">
+    
+</head>
+<body>
+  
+    <div class="container">
+        <div class="content">
+            <div class="display">
+                <input id="display_numeros" type="text">
+            </div>
+            <div class="row">
+                <button id="botao_limpar" label="C">C</button>
+                <button label="+/-">+/-</button>
+                <button id="botao_porcentagem" label="%">%</button>
+                <button id="botao_dividir" class="button__azul" label="/">/</button>
+            </div>
+            <div class="row">
+                <button id="botao_7" label="7">7</button>
+                <button id="botao_8" label="8">8</button>
+                <button id="botao_9" label="9">9</button>
+                <button id="botao_multiplicar" class="button__azul" label="x">x</button>
+            </div>
+            <div class="row">
+                <button id="botao_4" label="4">4</button>
+                <button id="botao_5" label="5">5</button>
+                <button id="botao_6" label="6">6</button>
+                <button id="botao_subtrair" class="button__azul" label="-">-</button>
+            </div>
+            <div class="row">
+                <button id="botao_1" label="1">1</button>
+                <button id="botao_2" label="2">2</button>
+                <button id="botao_3" label="3">3</button>
+                <button id="botao_somar" class="button__azul" label="+">+</button>
+            </div>
+            <div class="row">
+                <button label=".">.</button>
+                <button id="botao_0" label="0">0</button>
+                <button label=".">.</button>
+                <button class="button__azul" label="=">=</button>
+            </div>                                                
+        </div>
+    </div>
+
+    <script>
+
+        const display = document.getElementById('display_numeros');
+        
+        botao_limpar.addEventListener("click", () => display.value = '');
+        
+        botao_0.addEventListener("click", () => display.value += '0');
+        botao_1.addEventListener("click", () => display.value += '1');
+        botao_2.addEventListener("click", () => display.value += '2');
+        botao_3.addEventListener("click", () => display.value += '3');
+        botao_4.addEventListener("click", () => display.value += '4');
+        botao_5.addEventListener("click", () => display.value += '5');
+        botao_6.addEventListener("click", () => display.value += '6');
+        botao_7.addEventListener("click", () => display.value += '7');
+        botao_8.addEventListener("click", () => display.value += '8');
+        botao_9.addEventListener("click", () => display.value += '9');
+
+        botao_somar.addEventListener("click", () => display.value += '+');
+        botao_subtrair.addEventListener("click", () => display.value += '-');
+        botao_multiplicar.addEventListener("click", () => display.value += '*');
+        botao_dividir.addEventListener("click", () => display.value += '/');
+        botao_porcentagem.addEventListener("click", () => display.value += '%');
+
+    </script>
+
+
+</body>
+</html>
