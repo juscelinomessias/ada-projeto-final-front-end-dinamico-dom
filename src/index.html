@@ -52,6 +52,7 @@
     <script>
         const display = document.getElementById('display_numeros');
         let expressao = '';
+        let total = 0;
 
         const atualizarDisplay = () => {
             display.value = expressao;
@@ -69,9 +70,19 @@
 
         const somar = () => {
             const partes = expressao.split('+');
-            let resultado = 0;
+            let resultado = total;
             for (let i = 0; i < partes.length; i++) {
-              resultado = Number(partes[i]);
+              resultado += Number(partes[i]);
+            }
+            expressao = resultado.toString();
+            atualizarDisplay();
+        }
+
+        const subtrair = () => {
+            const partes = expressao.split('-');
+            let resultado = Number(partes[0]);
+            for (let i = 1; i < partes.length; i++) {
+              resultado -= Number(partes[i]);
             }
             expressao = resultado.toString();
             atualizarDisplay();
@@ -91,7 +102,7 @@
         document.getElementById('botao_multiplicar').addEventListener('click', () => adicionarAoDisplay('*'));
         document.getElementById('botao_dividir').addEventListener('click', () => adicionarAoDisplay('/'));
         document.getElementById('botao_porcentagem').addEventListener('click', () => adicionarAoDisplay('%'));
-        document.getElementById('igual').addEventListener('click', somar);
+        document.getElementById('igual').addEventListener('click', subtrair);
     </script>
 </body>
 </html>
