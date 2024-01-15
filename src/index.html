@@ -52,6 +52,7 @@
     <script>
         const display = document.getElementById('display_numeros');
         let expressao = '';
+        let total = 0;
 
         const atualizarDisplay = () => {
             display.value = expressao;
@@ -69,7 +70,40 @@
 
         const somar = () => {
             const partes = expressao.split('+');
-            const resultado = partes.reduce((total, parte) => total + Number(parte), 0);
+            let resultado = 0;
+            for (let i = 0; i < partes.length; i++) {
+              resultado += Number(partes[i]);
+            }
+            expressao = resultado.toString();
+            atualizarDisplay();
+        }
+
+        const subtrair = () => {
+            const partes = expressao.split('-');
+            let resultado = Number(partes[0]);
+            for (let i = 1; i < partes.length; i++) {
+              resultado -= Number(partes[i]);
+            }
+            expressao = resultado.toString();
+            atualizarDisplay();
+        }
+
+        const multiplicar = () => {
+            const partes = expressao.split('x');
+            let resultado = 1;
+            for (let i = 0; i < partes.length; i++) {
+              resultado = resultado * Number(partes[i]);
+            }
+            expressao = resultado.toString();
+            atualizarDisplay();
+        }
+
+        const dividir = () => {
+            const partes = expressao.split('/');
+            let resultado = Number(partes[0]);
+            for (let i = 1; i < partes.length; i++) {
+              resultado = resultado / Number(partes[i]);
+            }
             expressao = resultado.toString();
             atualizarDisplay();
         }
@@ -85,10 +119,10 @@
         document.getElementById('botao_limpar').addEventListener('click', limparDisplay);
         document.getElementById('botao_somar').addEventListener('click', () => adicionarAoDisplay('+'));
         document.getElementById('botao_subtrair').addEventListener('click', () => adicionarAoDisplay('-'));
-        document.getElementById('botao_multiplicar').addEventListener('click', () => adicionarAoDisplay('*'));
+        document.getElementById('botao_multiplicar').addEventListener('click', () => adicionarAoDisplay('x'));
         document.getElementById('botao_dividir').addEventListener('click', () => adicionarAoDisplay('/'));
         document.getElementById('botao_porcentagem').addEventListener('click', () => adicionarAoDisplay('%'));
-        document.getElementById('igual').addEventListener('click', somar);
+        document.getElementById('igual').addEventListener('click', dividir);
     </script>
 </body>
 </html>
