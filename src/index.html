@@ -69,7 +69,10 @@
 
         const somar = () => {
             const partes = expressao.split('+');
-            const resultado = partes.reduce((total, parte) => total + Number(parte), 0);
+            let resultado = 0;
+            for (let i = 0; i < partes.length; i++) {
+              resultado = Number(partes[i]);
+            }
             expressao = resultado.toString();
             atualizarDisplay();
         }
