@@ -70,7 +70,7 @@
 
         const somar = () => {
             const partes = expressao.split('+');
-            let resultado = total;
+            let resultado = 0;
             for (let i = 0; i < partes.length; i++) {
               resultado += Number(partes[i]);
             }
@@ -98,6 +98,16 @@
             atualizarDisplay();
         }
 
+        const dividir = () => {
+            const partes = expressao.split('/');
+            let resultado = Number(partes[0]);
+            for (let i = 1; i < partes.length; i++) {
+              resultado = resultado / Number(partes[i]);
+            }
+            expressao = resultado.toString();
+            atualizarDisplay();
+        }
+
         const numeros = document.querySelectorAll('.numero');
         
         numeros.forEach(numero => {
@@ -112,7 +122,7 @@
         document.getElementById('botao_multiplicar').addEventListener('click', () => adicionarAoDisplay('x'));
         document.getElementById('botao_dividir').addEventListener('click', () => adicionarAoDisplay('/'));
         document.getElementById('botao_porcentagem').addEventListener('click', () => adicionarAoDisplay('%'));
-        document.getElementById('igual').addEventListener('click', multiplicar);
+        document.getElementById('igual').addEventListener('click', dividir);
     </script>
 </body>
 </html>
