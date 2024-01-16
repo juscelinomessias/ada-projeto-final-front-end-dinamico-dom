@@ -96,40 +96,40 @@
         }
 
         const somar = () => {
-            const partes = expressao.split('+');
+            const nums = expressao.split('+');
             let resultado = 0;
-            for (let i = 0; i < partes.length; i++) {
-              resultado += Number(partes[i]);
+            for (let i = 0; i < nums.length; i++) {
+              resultado += Number(nums[i]);
             }
             expressao = resultado.toString();
             atualizarDisplay();
         }
 
         const subtrair = () => {
-            const partes = expressao.split('-');
-            let resultado = Number(partes[0]);
-            for (let i = 1; i < partes.length; i++) {
-              resultado -= Number(partes[i]);
+          const nums = expressao.split('-');
+          let resultado = Number(nums[0]);
+            for (let i = 1; i < nums.length; i++) {
+              resultado -= Number(nums[i]);
             }
             expressao = resultado.toString();
             atualizarDisplay();
         }
 
         const multiplicar = () => {
-            const partes = expressao.split('x');
+            const nums = expressao.split('x');
             let resultado = 1;
-            for (let i = 0; i < partes.length; i++) {
-              resultado = resultado * Number(partes[i]);
+            for (let i = 0; i < nums.length; i++) {
+              resultado = resultado * Number(nums[i]);
             }
             expressao = resultado.toString();
             atualizarDisplay();
         }
 
         const dividir = () => {
-            const partes = expressao.split('/');
-            let resultado = Number(partes[0]);
-            for (let i = 1; i < partes.length; i++) {
-              resultado = resultado / Number(partes[i]);
+            const nums = expressao.split('/');
+            let resultado = Number(nums[0]);
+            for (let i = 1; i < nums.length; i++) {
+              resultado = resultado / Number(nums[i]);
             }
             expressao = resultado.toString();
             atualizarDisplay();
