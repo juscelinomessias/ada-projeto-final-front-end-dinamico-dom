@@ -17,34 +17,34 @@
                 <input id="display_numeros" type="text">
             </div>
             <div class="row">
-                <button id="botao_limpar" label="C">C</button>
-                <button label="+/-">+/-</button>
-                <button id="botao_porcentagem" label="%">%</button>
-                <button id="botao_dividir" class="button__azul" label="/">/</button>
+                <button id="botao_limpar" aria-label="Limpar">C</button>
+                <button aria-label="Mais ou Menos">+/-</button>
+                <button id="botao_porcentagem" aria-label="Porcentagem">%</button>
+                <button id="botao_dividir" class="button__azul" aria-label="Divisão">/</button>
             </div>
             <div class="row">
                 <button class="numero" id="botao_7" label="7">7</button>
                 <button class="numero" id="botao_8" label="8">8</button>
                 <button class="numero" id="botao_9" label="9">9</button>
-                <button id="botao_multiplicar" class="button__azul" label="x">x</button>
+                <button id="botao_multiplicar" class="button__azul" aria-label="Multiplicação">x</button>
             </div>
             <div class="row">
                 <button class="numero" id="botao_4" label="4">4</button>
                 <button class="numero" id="botao_5" label="5">5</button>
                 <button class="numero" id="botao_6" label="6">6</button>
-                <button id="botao_subtrair" class="button__azul" label="-">-</button>
+                <button id="botao_subtrair" class="button__azul" aria-label="Subtração">-</button>
             </div>
             <div class="row">
                 <button class="numero" id="botao_1" label="1">1</button>
                 <button class="numero" id="botao_2" label="2">2</button>
                 <button class="numero" id="botao_3" label="3">3</button>
-                <button id="botao_somar" class="button__azul" label="+">+</button>
+                <button id="botao_somar" class="button__azul" aria-label="Adição">+</button>
             </div>
             <div class="row">
                 <button label=".">.</button>
                 <button class="numero" id="botao_0" label="0">0</button>
                 <button label=".">.</button>
-                <button id="igual" class="button__azul" label="=">=</button>
+                <button id="igual" class="button__azul" aria-label="Igual">=</button>
             </div>                                                
         </div>
     </div>
@@ -79,24 +79,45 @@
         }
 
         const seletorDeOperacao = () => {
-          switch (operador) {
-            case '+':
-              somar();
-              break;
-            case '-':
-              subtrair();
-              break;
-            case 'x':
-              multiplicar();
-              break;
-            case '/':
-              dividir();
-              break;
-          }
+            try {
+            const partes = expressao.split(/([+\-x/])/);
+            let resultado = Number(partes[0]);
+            
+            for (let i = 1; i < partes.length; i += 2) {
+                const operador = partes[i];
+                const proximoNumero = Number(partes[i + 1]);
+
+                switch (operador) {
+                    case '+':
+                        resultado += proximoNumero;
+                        break;
+                    case '-':
+                        resultado -= proximoNumero;
+                        break;
+                    case 'x':
+                        resultado *= proximoNumero;
+                        break;
+                    case '/':
+                        if (proximoNumero === 0) {
+                            throw new Error("Divisão por zero não é permitida.");
+                        }
+                        resultado /= proximoNumero;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            expressao = resultado.toString();
+            atualizarDisplay();
+            } catch (error) {
+                expressao = 'Erro';
+                atualizarDisplay();
+            }
         }
 
         const somar = () => {
-            const partes = expressao.split('+');
+             const partes = expressao.split('+');
             let resultado = 0;
             for (let i = 0; i < partes.length; i++) {
               resultado += Number(partes[i]);
@@ -116,7 +137,7 @@
         }
 
         const multiplicar = () => {
-            const partes = expressao.split('x');
+             const partes = expressao.split('x');
             let resultado = 1;
             for (let i = 0; i < partes.length; i++) {
               resultado = resultado * Number(partes[i]);
@@ -134,6 +155,8 @@
             expressao = resultado.toString();
             atualizarDisplay();
         }
+
+
 
         const numeros = document.querySelectorAll('.numero');
         
