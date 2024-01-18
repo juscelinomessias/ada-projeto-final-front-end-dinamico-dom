@@ -4,55 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora - DOM</title>
-
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/main.css">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.1.0/math.js"></script>
 </head>
 <body>
-  
     <div class="container">
         <div class="content">
             <div class="display">
-                <input id="display_numeros" type="text">
+                <input id="display_numeros" type="text" readonly>
             </div>
             <div class="row">
-                <button id="botao_limpar" label="C">C</button>
-                <button label="+/-">+/-</button>
-                <button id="botao_porcentagem" label="%">%</button>
-                <button id="botao_dividir" class="button__azul" label="/">/</button>
+                <button id="botao_limpar" aria-label="Limpar">C</button>
+                <button aria-label="Mais ou menos">+/-</button>
+                <button id="botao_porcentagem" aria-label="Porcentagem">%</button>
+                <button id="botao_dividir" class="button__azul" aria-label="Divisão">/</button>
             </div>
             <div class="row">
-                <button class="numero" id="botao_7" label="7">7</button>
-                <button class="numero" id="botao_8" label="8">8</button>
-                <button class="numero" id="botao_9" label="9">9</button>
-                <button id="botao_multiplicar" class="button__azul" label="x">x</button>
+                <button class="numero" id="botao_7" aria-label="Sete">7</button>
+                <button class="numero" id="botao_8" aria-label="Oito">8</button>
+                <button class="numero" id="botao_9" aria-label="Nove">9</button>
+                <button id="botao_multiplicar" class="button__azul" aria-label="Multiplicação">x</button>
             </div>
             <div class="row">
-                <button class="numero" id="botao_4" label="4">4</button>
-                <button class="numero" id="botao_5" label="5">5</button>
-                <button class="numero" id="botao_6" label="6">6</button>
-                <button id="botao_subtrair" class="button__azul" label="-">-</button>
+                <button class="numero" id="botao_4" aria-label="Quatro">4</button>
+                <button class="numero" id="botao_5" aria-label="Cinco">5</button>
+                <button class="numero" id="botao_6" aria-label="Seis">6</button>
+                <button id="botao_subtrair" class="button__azul" aria-label="Subtração">-</button>
             </div>
             <div class="row">
-                <button class="numero" id="botao_1" label="1">1</button>
-                <button class="numero" id="botao_2" label="2">2</button>
-                <button class="numero" id="botao_3" label="3">3</button>
-                <button id="botao_somar" class="button__azul" label="+">+</button>
+                <button class="numero" id="botao_1" aria-label="Um">1</button>
+                <button class="numero" id="botao_2" aria-label="Dois">2</button>
+                <button class="numero" id="botao_3" aria-label="Três">3</button>
+                <button id="botao_somar" class="button__azul" aria-label="Adição">+</button>
             </div>
             <div class="row">
-                <button label=".">.</button>
-                <button class="numero" id="botao_0" label="0">0</button>
-                <button label=".">.</button>
-                <button id="igual" class="button__azul" label="=">=</button>
+                <button aria-label="Ponto">.</button>
+                <button class="numero" id="botao_0" aria-label="Zero">0</button>
+                <button id="botao_raiz" arial-label="Raiz Quadrada">&radic;</button>
+                <button id="igual" class="button__azul" aria-label="Igual">=</button>
             </div>                                                
         </div>
     </div>
-
     <script>
         const display = document.getElementById('display_numeros');
         let expressao = '';
-        let total = 0;
         let operador = '';
 
         const atualizarDisplay = () => {
@@ -60,18 +56,9 @@
         }
 
         const adicionarAoDisplay = (valor) => {
-            filtrarOperador(valor)
             expressao += valor;
             atualizarDisplay();
         }    
-
-        const filtrarOperador = (char) => {
-            const regexp = /[+\-x/]/g;
-            let match = char.match(regexp);
-            if (match) {
-              operador = char;
-            }
-        }
         
         const limparDisplay = () => {
             expressao = '';
@@ -79,62 +66,40 @@
         }
 
         const seletorDeOperacao = () => {
-          switch (operador) {
-            case '+':
-              somar();
-              break;
-            case '-':
-              subtrair();
-              break;
-            case 'x':
-              multiplicar();
-              break;
-            case '/':
-              dividir();
-              break;
-          }
-        }
-
-        const somar = () => {
-            const nums = expressao.split('+');
-            let resultado = 0;
-            for (let i = 0; i < nums.length; i++) {
-              resultado += Number(nums[i]);
-            }
-            expressao = resultado.toString();
+          try {
+            expressao = math.evaluate(expressao).toString();
             atualizarDisplay();
+            } catch (error) {
+                console.error('Erro ao avaliar expressão:', error);
+                expressao = 'Erro';
+                atualizarDisplay();
         }
+      }
 
-        const subtrair = () => {
-          const nums = expressao.split('-');
-          let resultado = Number(nums[0]);
-            for (let i = 1; i < nums.length; i++) {
-              resultado -= Number(nums[i]);
-            }
-            expressao = resultado.toString();
+        const calcularRaizQuadrada = () => {
+          try {
+            expressao = Math.sqrt(math.evaluate(expressao)).toString();
             atualizarDisplay();
-        }
-
-        const multiplicar = () => {
-            const nums = expressao.split('x');
-            let resultado = 1;
-            for (let i = 0; i < nums.length; i++) {
-              resultado = resultado * Number(nums[i]);
+            } catch (error) {
+                console.error('Erro ao calcular raiz quadrada:', error);
+                expressao = 'Erro';
+                atualizarDisplay();
             }
-            expressao = resultado.toString();
-            atualizarDisplay();
         }
 
-        const dividir = () => {
-            const nums = expressao.split('/');
-            let resultado = Number(nums[0]);
-            for (let i = 1; i < nums.length; i++) {
-              resultado = resultado / Number(nums[i]);
+        const observarTeclado = (event) => { 
+          const teclaPressionada = event.key;
+            if (/^[0-9]+$/.test(teclaPressionada)) {
+              adicionarAoDisplay(teclaPressionada);
+            } else if (/^[+\-*/]$/.test(teclaPressionada)) {
+                adicionarAoDisplay(teclaPressionada);
+            } else if (teclaPressionada === 'Enter') {
+                seletorDeOperacao();
             }
-            expressao = resultado.toString();
-            atualizarDisplay();
         }
 
+        document.addEventListener('keydown', observarTeclado);
+ 
         const numeros = document.querySelectorAll('.numero');
         
         numeros.forEach(numero => {
@@ -149,6 +114,7 @@
         document.getElementById('botao_multiplicar').addEventListener('click', () => adicionarAoDisplay('x'));
         document.getElementById('botao_dividir').addEventListener('click', () => adicionarAoDisplay('/'));
         document.getElementById('botao_porcentagem').addEventListener('click', () => adicionarAoDisplay('%'));
+        document.getElementById('botao_raiz').addEventListener('click', calcularRaizQuadrada);
         document.getElementById('igual').addEventListener('click', seletorDeOperacao);
     </script>
 </body>
