@@ -89,14 +89,20 @@
 
         const observarTeclado = (event) => { 
           const teclaPressionada = event.key;
-            if (/^[0-9]+$/.test(teclaPressionada)) {
+            if (/^[0-9]+$/.test(teclaPressionada) || teclaPressionada === '.') {
               adicionarAoDisplay(teclaPressionada);
             } else if (/^[+\-*/]$/.test(teclaPressionada)) {
-                adicionarAoDisplay(teclaPressionada);
+                if (teclaPressionada === 'x'){
+                    adicionarAoDisplay('*')
+                }else{
+                    adicionarAoDisplay(teclaPressionada);
+                }
             } else if (teclaPressionada === 'Enter') {
+                event.preventDefault ();
                 seletorDeOperacao();
             }
-        }
+            }
+
 
         document.addEventListener('keydown', observarTeclado);
  
