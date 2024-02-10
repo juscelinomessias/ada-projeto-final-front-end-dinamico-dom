@@ -46,7 +46,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="#">
         <img src="https://avatars.githubusercontent.com/u/83884728?v=4" width="100px;" alt="Foto do Matheus no Github"/><br>
         <sub>
-          <b>Matheus Gabriel</b>
+          <b>Matheus Gabriel Nogueira</b>
         </sub>
       </a>
     </td>  
